@@ -1,9 +1,27 @@
+
+const express = require('express');
 const app = express();
 
 const routes = require('express').Router();
 
 const baseController = require('../controllers');
-app.use
+
+
+
+routes.use((req, res, next) => {
+  const now = new Date(Date.now());
+  const friendlyDate = now.toLocaleString('pt-BR', {
+    weekday: 'long', 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric', 
+    hour: 'numeric', 
+    minute: 'numeric', 
+    second: 'numeric'
+  });
+  console.log('Time:', friendlyDate);
+  next();
+});
 
 routes.get('/', baseController.getName);
 
